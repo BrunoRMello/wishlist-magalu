@@ -35,4 +35,12 @@ public class ProductModel implements Product {
   public int hashCode() {
     return Objects.hash(id);
   }
+
+  // Para retornar nos testes *Saber se o teste esta com retorno do useCase
+  @Override
+  public String toString() {
+    return "ProductModel{" +
+        "id='" + id + '\'' +
+        '}';
+  }
 }
