@@ -99,15 +99,15 @@ $ mvn clean package -DskipTests
 
 ``docker-compose up`` or ``docker-compose up -d``
 
+<p>Este comando irá construir a imagem do Docker e iniciar a aplicação dentro de um container.</p>
+
+
 <h3>Rodando localmente sem docker</h3>
 
 Descomentar o arquivo application.properties a linha
 ```#spring.data.mongodb.uri=mongodb://localhost:27017/wishlist```
 
 
-
-
-<p>Este comando irá construir a imagem do Docker e iniciar a aplicação dentro de um container.</p>
 
 <h3 id='documentacao'>Documentação:</h3>
 <p>Acesse a documentação completa da API em <code>http://localhost:8080/swagger-ui.html</code></p>
