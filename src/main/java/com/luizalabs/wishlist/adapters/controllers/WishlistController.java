@@ -49,7 +49,7 @@ public class WishlistController {
   }
 
   @PostMapping("/{customerId}/products")
-  @Tag(name = "Customers", description = "Adiciona um produto a lista")
+  @Tag(name = "Customers", description = "")
   @Operation(summary = "adicionar produtos para lista")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Produto adicionado com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class), examples = @ExampleObject(value = "{\"message\": \"Produto adicionado com sucesso\"}"))),
@@ -65,6 +65,14 @@ public class WishlistController {
   }
 
   @DeleteMapping("/{customerId}/products/{productId}")
+  @Tag(name = "Customers")
+  @Operation(summary = "remover item da lista")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Produto removido da lista de desejos", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class), examples = @ExampleObject(value = "{\"message\": \"Produto removido da lista de desejos\"}"))),
+      @ApiResponse(responseCode = "400", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Produto não está na lista de desejos\"}"))),
+      @ApiResponse(responseCode = "404", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Cliente não encontrado\"}")))
+
+  })
   public ResponseEntity<String> removeProductFromWishlist(@PathVariable String customerId,
       @PathVariable String productId) {
     ResponseEntity<String> response = removeProductFromWishlistUseCase.execute(customerId, productId);
@@ -72,6 +80,14 @@ public class WishlistController {
   }
 
   @GetMapping("/{customerId}/products/{productId}")
+  @Tag(name = "Customers")
+  @Operation(summary = "Saber se o produto esta na lista")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Produto está na lista de desejos", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class), examples = @ExampleObject(value = "{\"message\": \"Produto está na lista de desejos\"}"))),
+      @ApiResponse(responseCode = "400", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Produto não está na lista de desejos\"}"))),
+      @ApiResponse(responseCode = "404", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Cliente não encontrado\"}")))
+
+  })
   public ResponseEntity<String> getOneProductFromWishlist(@PathVariable String customerId,
       @PathVariable String productId) {
     ResponseEntity<String> response = getOneProductFromWishlistUseCase.execute(customerId, productId);
@@ -79,6 +95,13 @@ public class WishlistController {
   }
 
   @GetMapping("/{customerId}/products")
+  @Tag(name = "Customers")
+  @Operation(summary = "Obter todos os produtos da lista de desejos", description = "Retorna uma lista de produtos que estão na lista de desejos do cliente especificado.")
+  @ApiResponses(value = {
+      @ApiResponse(responseCode = "200", description = "Produtos da lista de desejos recuperados com sucesso", content = @Content(mediaType = "application/json", schema = @Schema(implementation = SuccessResponse.class, type = "array", example = "[{\"id\": \"product2\"}, {\"id\": \"product\"}]"), examples = @ExampleObject(value = "[{\"id\": \"product2\"}, {\"id\": \"product\"}]"))),
+      @ApiResponse(responseCode = "400", description = "Erro de requisição inválida", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Cliente não encontrado\"}"))),
+      @ApiResponse(responseCode = "404", description = "Cliente não encontrado", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorResponse.class), examples = @ExampleObject(value = "{\"error\": \"Cliente não encontrado\"}")))
+  })
   public ResponseEntity<Set<Product>> getAllProductsFromWishlist(@PathVariable String customerId) {
     Set<Product> products = getAllProductsFromWishlistUseCase.execute(customerId);
     return ResponseEntity.ok(products);

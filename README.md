@@ -112,6 +112,8 @@ Descomentar o arquivo application.properties a linha
 <h3 id='documentacao'>Documentação:</h3>
 <p>Acesse a documentação completa da API em <code>http://localhost:8080/swagger-ui.html</code></p>
 
+![docs](https://github.com/BrunoRMello/wishlist-magalu/assets/59987398/61e8ca34-ef32-464e-b2bb-fdff37d3504e)
+
 <h2 id="decisoes-tecnicas">Decisões Técnicas:</h2>
 <h3>Spring Boot:</h3>
 <p>O Spring Boot foi escolhido pela sua capacidade de simplificar a configuração e o desenvolvimento de aplicações Java standalone e de produção.</p>

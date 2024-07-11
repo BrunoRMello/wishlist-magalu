@@ -15,12 +15,8 @@ import com.luizalabs.wishlist.domain.models.ProductModel;
 import com.luizalabs.wishlist.domain.usecases.AddProductToWishlistUseCase;
 import com.luizalabs.wishlist.domain.usecases.CustomerUseCase;
 
-import io.swagger.v3.oas.annotations.OpenAPIDefinition;
-import io.swagger.v3.oas.annotations.info.Info;
-
 @SpringBootApplication
 
-@OpenAPIDefinition(info = @Info(title = "Api Rest wishlist", description = "Api para wishlist", version = "1"))
 public class WishlistApplication {
 
 	public static void main(String[] args) {
