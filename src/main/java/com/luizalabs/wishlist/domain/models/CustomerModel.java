@@ -10,11 +10,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class CustomerModel {
   private String id;
   private Set<Product> wishlist;
-  private Set<ProductModel> products;
+  private Set<Product> products;
 
   public CustomerModel(String id, Set<Product> wishlist) {
     this.id = id;
     this.wishlist = wishlist == null ? new HashSet<>() : wishlist;
+    this.wishlist = wishlist == null ? new HashSet<>() : new HashSet<>(wishlist);
+
     this.products = new HashSet<>();
   }
 
@@ -40,11 +42,11 @@ public class CustomerModel {
     this.wishlist = wishlist;
   }
 
-  public Set<ProductModel> getProducts() {
+  public Set<Product> getProducts() {
     return products;
   }
 
-  public void setProducts(Set<ProductModel> products) {
+  public void setProducts(Set<Product> products) {
     this.products = products;
   }
 

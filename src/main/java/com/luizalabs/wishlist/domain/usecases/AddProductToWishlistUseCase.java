@@ -8,6 +8,7 @@ import com.luizalabs.wishlist.domain.models.CustomerModel;
 
 import com.luizalabs.wishlist.domain.models.ProductModel;
 import com.luizalabs.wishlist.domain.ports.CustomerPort;
+import com.luizalabs.wishlist.exceptions.CustomerNotFoundException;
 import com.luizalabs.wishlist.exceptions.ProductAlreadyInWishlistException;
 
 @Component
@@ -23,7 +24,7 @@ public class AddProductToWishlistUseCase {
     Optional<CustomerModel> customerOpt = customerPort.findById(customerId);
 
     if (customerOpt.isEmpty()) {
-      throw new RuntimeException("Cliente não encontrado");
+      throw new CustomerNotFoundException("Cliente não encontrado");
     }
 
     CustomerModel customer = customerOpt.get();
