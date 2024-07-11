@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+*.jar
+*.war
+*.zip
+*.iml
+*.idea
+*.vscode
+*.git
+*.gitignore
+README.md
