@@ -1,20 +1,23 @@
 version: '3.8'
 services:
-  wishlist:
-    build: .
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
     ports:
-      - "8080:8080"
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  wishlist:
+    build:
+      context: .
     depends_on:
       - mongodb
     environment:
       - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/wishlist
-
-  mongodb:
-    image: mongo:4.4
+      - SPRING_PROFILES_ACTIVE=development
     ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
+      - "8080:8080"
 
 volumes:
-  mongo-data:
+  mongodb_data:

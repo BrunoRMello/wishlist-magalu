@@ -1,19 +1,17 @@
-FROM ubuntu:latest AS build
 
-
-RUN apt-get update
-RUN apt-get install openjdk-17-jdk -y
-
+FROM maven:3.9.4 AS build
+WORKDIR /workspace
 COPY . .
+RUN mvn clean package -DskipTests
 
-RUN apt-get install maven -y
-RUN mvn clean install
 
-FROM openjdk:17-jdk-slim
+FROM openjdk:20
+WORKDIR /app
+
+
+COPY --from=build /workspace/target/wishlist-0.0.1-SNAPSHOT.jar /app/app.jar
+
 
 EXPOSE 8080
 
-COPY --from=build /target/wishlist-0.0.1-SNAPSHOT.jar app.jar
-
-
-ENTRYPOINT [ "java", "-jar", "app.jar" ]
+CMD ["java", "-jar", "/app/app.jar"]
